@@ -15,22 +15,22 @@ public class BowlingGame {
 	 */
 	public int getBowlingScore(String bowlingCode) {
 		int score = 0;
-		//|是特殊字符，需要转义
+		//give // before|
 		turnScore = bowlingCode.split("\\|");
 		if(turnScore.length > 10)
 			extra = turnScore[11].toCharArray();
 		else
 			extra = null;
-		//计算每一局分数
+		//score for each turn 
 		int i = 0;
 		while(i != 10) {
 			int curScore = 0;
-		    if (turnScore[i].equals("X")){ //如果是strike，则分数为10且加上下两个球的分数
-				if (i < 9) //如果是第9局之前
+		    if (turnScore[i].equals("X")){ //if strike then 10 add next two ball
+				if (i < 9) //if before turn no.10
 					curScore = 10 + getNextScore(i+1, 2);
 				else if(i == 9)
 					curScore = 10 + charToInt(extra[0]) + charToInt(extra[1]);
-		    } else if (matchRegex("[1-9]/", turnScore[i])) {//如果是spare
+		    } else if (matchRegex("[1-9]/", turnScore[i])) {//if spare
 		    	if(i < 9)
 		    		curScore = 10 + getNextScore(i+1, 1);
 		    	if(i == 9)
